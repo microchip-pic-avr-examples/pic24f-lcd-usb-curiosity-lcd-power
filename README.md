@@ -21,7 +21,6 @@ This is the demo software which runs on PIC24F LCD USB Curiosity Development Boa
 
 - MPLAB® X IDE v5.40 or newer (https://www.microchip.com/mplabx)
 - MPLAB® XC16 v1.50 or newer (https://www.microchip.com/xc)
-- MPLAB® Code Configurator(MCC) v3.95 (https://www.microchip.com/mcc)
 
 
 ## Operation
