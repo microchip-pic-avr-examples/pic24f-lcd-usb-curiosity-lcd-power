@@ -1,0 +1,89 @@
+================================================================
+PIC24F LCD & USB Curiosity Development Board
+================================================================
+
+mikroBUS(tm) connections
+----------------------------------------------------------------
+The PIC24F256GA7 Curiosity Development Board has two mikroBUS 
+ports.  
+
+  +- mikroBUS A pin
+  |      +- Processor pin
+  |      |             
+/===\ /=====\ 
+AN   |  RB7  |
+RST  |  RD8  |
+CS   |  RG9  | 
+SCK  |  RG6  | - shared with TC77
+MISO |  RD1  | - shared with TC77
+MOSI |  RD2  | - shared with TC77
+PWM  |  RD7  |
+INT  |  RF8  |
+RX   |  RF2  |
+TX   |  RF3  |
+SCL  |  RA14 | 
+SDA  |  RA15 | 
+
+  +- mikroBUS B pin
+  |      +- Processor pin
+  |      |             
+/===\ /=====\ 
+AN   |  RB4  |
+RST  |  RE9  |
+CS   |  RD6  | 
+SCK  |  RD4  |    
+MISO |  RD3  | 
+MOSI |  RD4  | 
+PWM  |  RB2  |
+INT  |  RE8  |
+RX   |  RF4  | 
+TX   |  RF5  | 
+SCL  |  RA2  | 
+SDA  |  RA3  | 
+
+Switches
+----------------------------------------------------------------
+
+  +- Switch
+  |      +- Processor pin
+  |      |            
+/===\ /=====\ 
+S1   |  RG15 |  
+S2   |  RD13 |
+S4   |  MCLR |
+
+LEDs
+----------------------------------------------------------------
+
+      +- Switch
+      |         +- Processor pin
+      |         |            
+/==========\ /=====\ 
+LED1        |  RA0  |  
+LED2        |  RA1  |
+LED3(red)   |  RD9  |
+LED3(green) |  RD10 |
+LED3(blue)  |  RD11 |
+
+Potentiometer
+----------------------------------------------------------------
+
+     +- Potentiometer
+     |            +- Processor pin
+     |            |            
+/============\ /=====\ 
+Potentiometer |  RB5 |  
+
+USB Power Sense
+----------------------------------------------------------------
+There is a resistor divider on RB13 that will take a 5v input and
+convert it to around 3.2v to allow for a simple I/O read
+operation to sense the USB power presence.
+
+References/Links
+----------------------------------------------------------------
+[1] http://www.mikroe.com/mikrobus/
+
+Legal
+----------------------------------------------------------------
+mikroBUS a trademark of MikroElectronika.
