@@ -17,12 +17,12 @@ limitations under the License.
 #include <stddef.h>
 
 #include "power.h"
-#include "usb_operational_mode.h"
-#include "battery_operational_mode.h"
+#include "application/usb_operational_mode.h"
+#include "application/battery_operational_mode.h"
 #include "mcc_generated_files/rtcc.h"
-#include "io_pins.h"
-#include "lcd1.h"
-#include "build_time.h"
+#include "mcc_generated_files/system.h"
+#include "mcc_generated_files/lcd.h"
+#include "application/build_time.h"
 
 static void SwitchOperatoinalMode(enum POWER_SOURCE new_source);
 
@@ -50,13 +50,8 @@ int main(void)
     struct tm build_time;
     
     enum POWER_SOURCE new_source;
-    
-    POWER_Initialize();
-    IO_PINS_Initialize();
-    LCD1_Initialize();
-
-    RTCC_Initialize();
-    
+    SYSTEM_Initialize();
+   
     BUILDTIME_Get(&build_time);
     RTCC_TimeSet(&build_time);
     
