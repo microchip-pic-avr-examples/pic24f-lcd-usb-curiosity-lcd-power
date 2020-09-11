@@ -17,16 +17,15 @@ limitations under the License.
 #include <stdio.h>
 
 #include "timer_1ms.h"
-#include "mcc_generated_files/lcd.h"
 #include "operational_mode.h"
-#include "mcc_generated_files/rtcc.h"
 #include "lcd_demo.h"
+#include "mcc_generated_files/lcd.h"
+#include "mcc_generated_files/rtcc.h"
+#include "mcc_generated_files/system.h"
 
 //------------------------------------------------------------------------------
 //Application related definitions
 //------------------------------------------------------------------------------
-#define BUTTON_DEBOUCE_TIME_MS      20
-
 typedef enum
 {
     BUTTON_COLOR_RED = 0,
@@ -69,6 +68,7 @@ const struct OPERATIONAL_MODE usb_operational_mode = {
 //------------------------------------------------------------------------------
 static void USBPowerModeTask_Initialize(void)
 {   
+    SYSTEM_Initialize();
     //Turn on a timer, so to generate periodic interrupts.
     TIMER_SetConfiguration(TIMER_CONFIGURATION_1MS);
     

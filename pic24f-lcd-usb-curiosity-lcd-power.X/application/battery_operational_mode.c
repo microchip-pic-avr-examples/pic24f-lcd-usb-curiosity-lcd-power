@@ -49,6 +49,10 @@ static void BatteryModeTasks(void)
     POWER_SetMode(POWER_MODE_LOW);
     
     RTCC_TimeGet(&date_time);
+    
+    ADC1_Initialize();
+    ANCFGbits.VBGEN3 = 1;
+    
     LCD_DEMO_PrintTime(date_time.tm_hour, date_time.tm_min);
     
     UpdateBatteryStatusIcon();

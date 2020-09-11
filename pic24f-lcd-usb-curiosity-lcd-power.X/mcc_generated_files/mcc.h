@@ -51,13 +51,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "rtcc.h"
+#include "lcd.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "tmr3.h"
 #include "adc1.h"
+#include "tmr3.h"
+#include "rtcc.h"
 #include "spi1.h"
-#include "lcd.h"
 
 #warning "This file will be removed in future MCC releases. Use system.h instead."
 
