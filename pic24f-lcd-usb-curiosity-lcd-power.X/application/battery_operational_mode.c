@@ -39,8 +39,6 @@ const struct OPERATIONAL_MODE battery_operational_mode = {
 
 static void BatteryModeTasks_Initialize(void)
 {        
-    POWER_SetMode(POWER_MODE_LOW);
-    
     TC77_Shutdown();
 }
 
@@ -54,7 +52,7 @@ static void BatteryModeTasks(void)
     ANCFGbits.VBGEN3 = 1;
     
     LCD_DEMO_PrintTime(date_time.tm_hour, date_time.tm_min);
-    
+    LCD_SetPowerMode(LCD_POWER_MODE_HIGH);
     UpdateBatteryStatusIcon();
     
     POWER_SetMode(POWER_MODE_SLEEP);
