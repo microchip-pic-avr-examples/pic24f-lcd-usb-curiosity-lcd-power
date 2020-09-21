@@ -76,6 +76,7 @@ void LCD_DEMO_PrintTime(uint8_t hour, uint8_t minute)
 {  
     LCD_CLEAR();
     LCD_COLON1_On();
+    LCD_MICROCHIP1_On();
     
     LCD_CHAR1_AltPrint(' ');   // 
     LCD_CHAR2_AltPrint(' ');   // 
