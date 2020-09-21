@@ -44,9 +44,6 @@ enum DISPLAY_MODE
 //------------------------------------------------------------------------------
 //Private prototypes
 //------------------------------------------------------------------------------
-static void UpdateSegmentedLCD(void);
-static void UpdatePrintout(void);
-
 static void USBPowerModeTask_Initialize(void);
 static void USBPowerModeTask_Deinitialization(void);
 static void USBPowerModeTasks(void);
@@ -69,42 +66,19 @@ const struct OPERATIONAL_MODE usb_operational_mode = {
 static void USBPowerModeTask_Initialize(void)
 {   
     SYSTEM_Initialize();
-    //Turn on a timer, so to generate periodic interrupts.
-    TIMER_SetConfiguration(TIMER_CONFIGURATION_1MS);
-    
-    //Register the ButtonDebounce() callback function, so it gets called periodically
-    //when the timer interrupts occur (in this case at 1:1 rate, so ButtonDebounce()
-    //executes once per 1ms).
-    TIMER_RequestTick(&UpdatePrintout, 10);
         
     LCD_Initialize();
     LCD_SetPowerMode(LCD_POWER_MODE_HIGH);
     LCD_DEMO_SetBatteryStatus(BATTERY_STATUS_UNKNOWN);
+    LCD_DEMO_PrintPIC24();
 }
 
 void USBPowerModeTasks(void)
 {      
-    if(update_printout == true)
-    {
-        update_printout = false;
-        
-        RTCC_TimeGet(&date_time);
-                
-        UpdateSegmentedLCD();
-    }
+
 }
 
 static void USBPowerModeTask_Deinitialization(void)
 {
     TIMER_SetConfiguration(TIMER_CONFIGURATION_OFF);
-}
-
-static void UpdateSegmentedLCD(void)
-{
-    LCD_DEMO_PrintPIC24();
-}
-
-static void UpdatePrintout(void)
-{
-    update_printout = true;
 }

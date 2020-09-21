@@ -58,8 +58,8 @@ void LCD_Initialize()
     // Disable LCD module before configuring
     LCDCONbits.LCDEN = 0;
 
-    //BIASMD 1/3 Bias mode; LP 1:11; WFT Type-A waveform; 
-    LCDPS = 0x0A;	
+    //BIASMD 1/3 Bias mode; LP 1:1; WFT Type-A waveform; 
+    LCDPS = 0x00;	
     //LRLAP High-Power mode; LRLBP High-Power mode; VLCD1PE Bias 1 level is internal; LCDCST Max contrast (Min Resistance); VLCD2PE Bias 2 level is internal; VLCD3PE Bias 3 level is internal; LRLAT Internal LCD reference ladder is always in B Power mode; LCDIRE enabled; 
     LCDREF = 0x80F0;	
     //CPEN disabled; CLKSEL disabled; 
@@ -72,8 +72,8 @@ void LCD_Initialize()
     LCDSE2 = 0x4000;	
     //SE51 disabled; SE62 enabled; SE52 disabled; SE63 disabled; SE60 disabled; SE50 enabled; SE61 enabled; SE48 disabled; SE59 enabled; SE49 disabled; SE57 disabled; SE58 enabled; SE55 disabled; SE56 disabled; SE53 disabled; SE54 disabled; 
     LCDSE3 = 0x6C04;	
-    //CS FRC; SLPEN enabled; WERR disabled; LMUX 1/8 COM[7:0]; LCDSIDL continues to operate in CPU Idle mode; LCDEN disabled; 
-    LCDCON = 0x07;	
+    //CS LPRC; SLPEN enabled; WERR disabled; LMUX 1/8 COM[7:0]; LCDSIDL continues to operate in CPU Idle mode; LCDEN disabled; 
+    LCDCON = 0x0F;	
 
     //Enable memory clear
     LCDASTATbits.PMCLEAR = 1;
@@ -108,7 +108,7 @@ void LCD_ModeSet(enum LCD_MODE mode)
                     LCDACTRLbits.BLINKMODE = 0x0002;//Enable Blink Mode with all pixels
                     LCDASTATbits.DMSEL = 0x0000;//Primary memory as Display Memory 
                     LCDACTRLbits.BLINKFCS= 0x0001;
-                    LCDFC1 = 0x0002;
+                    LCDFC1 = 0x0975;
                     LCDACTRLbits.ELCDEN = 1;//Enable LCD enhanced Mode
                     break;
 
@@ -117,7 +117,7 @@ void LCD_ModeSet(enum LCD_MODE mode)
                     LCDACTRLbits.BLINKMODE = 0x0002;//Enable Blink Mode with all pixels
                     LCDASTATbits.DMSEL = 0x0001;//Secondary memory as Display Memory 
                     LCDACTRLbits.BLINKFCS= 0x0001;
-                    LCDFC1 = 0x0002;
+                    LCDFC1 = 0x0975;
                     LCDACTRLbits.ELCDEN = 1;//Enable LCD enhanced Mode
                     break;
 
@@ -126,7 +126,7 @@ void LCD_ModeSet(enum LCD_MODE mode)
                     LCDACTRLbits.BLINKMODE = 0x0000;//Disable Blink Mode
                     LCDASTATbits.DMSEL = 0x0003;//Continuous switch over between primary and secondary memory
                     LCDACTRLbits.SMFCS = 0x0001;
-                    LCDFC0 = 0x0002;
+                    LCDFC0 = 0x0975;
                     LCDACTRLbits.ELCDEN = 1;//Enable LCD enhanced Mode
                     break;
 
@@ -135,7 +135,7 @@ void LCD_ModeSet(enum LCD_MODE mode)
                     LCDACTRLbits.BLINKMODE = 0x0001;//Enable Blink Mode with selected pixels
                     LCDASTATbits.DMSEL = 0x0000;//Primary memory as Display Memory 
                     LCDACTRLbits.BLINKFCS= 0x0001;
-                    LCDFC1 = 0x0002;
+                    LCDFC1 = 0x0975;
                     LCDACTRLbits.ELCDEN = 1;//Enable LCD enhanced Mode
                     break;
 

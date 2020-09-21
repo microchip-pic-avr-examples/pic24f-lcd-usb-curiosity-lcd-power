@@ -117,19 +117,19 @@
 #include "pin_manager.h"
 #include "clock.h"
 #include "system.h"
-#include "lcd.h"
+#include "adc1.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "adc1.h"
-#include "tmr3.h"
 #include "rtcc.h"
 #include "spi1.h"
+#include "tmr3.h"
+#include "lcd.h"
 
 void SYSTEM_Initialize(void)
 {
     PIN_MANAGER_Initialize();
-    INTERRUPT_Initialize();
     CLOCK_Initialize();
+    INTERRUPT_Initialize();
     LCD_Initialize();
     SPI1_Initialize();
     ADC1_Initialize();
