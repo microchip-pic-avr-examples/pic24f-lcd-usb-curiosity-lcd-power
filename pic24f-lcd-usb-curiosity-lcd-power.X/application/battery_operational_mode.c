@@ -39,6 +39,8 @@ const struct OPERATIONAL_MODE battery_operational_mode = {
 
 static void BatteryModeTasks_Initialize(void)
 {        
+    PIN_MANAGER_Initialize();
+    SPI1_Initialize();
     TC77_Shutdown();
 }
 

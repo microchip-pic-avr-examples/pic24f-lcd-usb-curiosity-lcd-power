@@ -52,7 +52,6 @@ static void USBPowerModeTasks(void);
 //Global variables
 //------------------------------------------------------------------------------
 static volatile bool update_printout = true;
-static struct tm date_time;
 
 const struct OPERATIONAL_MODE usb_operational_mode = {
     &USBPowerModeTask_Initialize,
@@ -64,9 +63,7 @@ const struct OPERATIONAL_MODE usb_operational_mode = {
 //Functions
 //------------------------------------------------------------------------------
 static void USBPowerModeTask_Initialize(void)
-{   
-    SYSTEM_Initialize();
-        
+{           
     LCD_Initialize();
     LCD_SetPowerMode(LCD_POWER_MODE_HIGH);
     LCD_DEMO_SetBatteryStatus(BATTERY_STATUS_UNKNOWN);
