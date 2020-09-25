@@ -1,5 +1,5 @@
 /*******************************************************************************
-Copyright 2016 Microchip Technology Inc. (www.microchip.com)
+Copyright 2019 Microchip Technology Inc. (www.microchip.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,30 +14,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 *******************************************************************************/
 
-#ifndef BSP_POWER_H
-#define BSP_POWER_H
+#ifndef POWER_H
+#define	POWER_H
 
-/** Type defintions *********************************/
-typedef enum
+enum POWER_SOURCE
 {
-    POWER_SOURCE_USB,
-    POWER_SOURCE_MAINS
-} POWER_SOURCE;
+    POWER_SOURCE_UNKNOWN = -1,
+    POWER_SOURCE_USB = 0,
+    POWER_SOURCE_BATTERY
+};
 
+enum POWER_MODE
+{
+    POWER_MODE_FULL,
+    POWER_MODE_LOW,
+    POWER_MODE_SLEEP
+};
 
-/*********************************************************************
-* Function: POWER_SOURCE POWER_SourceGet(void)
-*
-* Overview: Gets the current source of power for the board
-*
-* PreCondition: None
-*
-* Input: None
-*
-* Output: POWER_SOURCE - the current source of power for the board
-*
-********************************************************************/
-POWER_SOURCE POWER_SourceGet(void);
-#define POWER_SourceGet() POWER_SOURCE_USB
+void POWER_Initialize(void);
+enum POWER_SOURCE POWER_GetSource(void);
+double POWER_GetVddVoltage(void);
+double POWER_GetBatteryVoltage(void);
+void POWER_SetMode(enum POWER_MODE mode);
 
-#endif //BSP_POWER_H
+#endif	/* POWER_H */
+

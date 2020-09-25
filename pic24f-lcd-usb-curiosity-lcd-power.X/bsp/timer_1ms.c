@@ -23,59 +23,9 @@ limitations under the License.
 
 #include "timer_1ms.h"
 
-#ifndef SYSTEM_PERIPHERAL_CLOCK
-#ifndef FCY
-#define SYSTEM_PERIPHERAL_CLOCK 4000000
-#pragma message "This module requires a definition for the peripheral clock frequency.  Assuming 4MHz Fcy (4MHz Fosc).  Define value if this is not correct."
-#else 
-#define SYSTEM_PERIPHERAL_CLOCK FCY
-#endif
-#endif
-
-#define CLOCK_DIVIDER TIMER_PRESCALER_1
-#define PR1_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/1)
-
-#if (PR1_SETTING > 0xFFFF)
-#undef CLOCK_DIVIDER
-#undef PR1_SETTING
-#define CLOCK_DIVIDER TIMER_PRESCALER_8
-#define PR1_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/8)
-#endif
-
-#if (PR1_SETTING > 0xFFFF)
-#undef CLOCK_DIVIDER
-#undef PR1_SETTING
-#define CLOCK_DIVIDER TIMER_PRESCALER_64
-#define PR1_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/64)
-#endif
-
-#if (PR1_SETTING > 0xFFFF)
-#undef CLOCK_DIVIDER
-#undef PR1_SETTING
-#define CLOCK_DIVIDER TIMER_PRESCALER_256
-#define PR1_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/256)
-#endif
-
-
-/* Compiler checks and configuration *******************************/
 #ifndef TIMER_MAX_1MS_CLIENTS
     #define TIMER_MAX_1MS_CLIENTS 10
 #endif
-
-/* Definitions *****************************************************/
-#define STOP_TIMER_IN_IDLE_MODE     0x2000
-#define TIMER_SOURCE_INTERNAL       0x0000
-#define TIMER_SOURCE_EXTERNAL       0x0002
-#define TIMER_ON                    0x8000
-#define GATED_TIME_DISABLED         0x0000
-#define TIMER_16BIT_MODE            0x0000
-
-#define TIMER_PRESCALER_1           0x0000
-#define TIMER_PRESCALER_8           0x0010
-#define TIMER_PRESCALER_64          0x0020
-#define TIMER_PRESCALER_256         0x0030
-#define TIMER_INTERRUPT_PRIORITY    0x0001
-#define TIMER_INTERRUPT_PRIORITY_4  0x0004
 
 /* Type Definitions ************************************************/
 typedef struct
@@ -169,30 +119,12 @@ bool TIMER_SetConfiguration ( TIMER_CONFIGURATIONS configuration )
     {
         case TIMER_CONFIGURATION_1MS:
             memset ( requests , 0 , sizeof (requests ) ) ;
-
-            _T3IP = TIMER_INTERRUPT_PRIORITY ;
-            _T3IF = 0 ;
-
-            TMR3 = 0 ;
-
-            PR3 = PR1_SETTING ;
-            T3CON = TIMER_ON |
-                    STOP_TIMER_IN_IDLE_MODE |
-                    TIMER_SOURCE_INTERNAL |
-                    GATED_TIME_DISABLED |
-                    TIMER_16BIT_MODE |
-                    CLOCK_DIVIDER;
-
-            IEC0bits.T3IE = 1 ;
-
             configured = true;
             return true;
 
         case TIMER_CONFIGURATION_OFF:
-            IEC0bits.T3IE = 0 ;
             configured = false;
             return true;
-            
         default:
             break;
     }
@@ -219,7 +151,7 @@ bool TIMER_SetConfiguration ( TIMER_CONFIGURATIONS configuration )
   Remarks:
     None
  ***************************************************************************/
-void __attribute__ ( ( __interrupt__ , auto_psv ) ) _T3Interrupt ( void )
+void TMR3_CallBack(void)
 {
     uint8_t i ;
 
@@ -236,6 +168,4 @@ void __attribute__ ( ( __interrupt__ , auto_psv ) ) _T3Interrupt ( void )
             }
         }
     }
-
-    IFS0bits.T3IF = 0 ;
 }

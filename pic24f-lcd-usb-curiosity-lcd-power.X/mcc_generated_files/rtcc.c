@@ -14,15 +14,15 @@
   @Description:
     This header file provides APIs for driver for RTCC.
     Generation Information :
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.95-b-SNAPSHOT
-        Device            :  PIC24FJ1024GB610
+        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.169.0
+        Device            :  PIC24FJ512GU410
     The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.36
-        MPLAB 	          :  MPLAB X v5.10
+        Compiler          :  XC16 v1.50
+        MPLAB 	          :  MPLAB X v5.40
 */
 
 /*
-    (c) 2016 Microchip Technology Inc. and its subsidiaries. You may use this
+    (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
     software and any derivatives exclusively with Microchip products.
 
     THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
@@ -74,24 +74,24 @@ void RTCC_Initialize(void)
    
    if(!RTCCTimeInitialized())
    {
-       // set 2019-04-25 11-51-43
-       DATEH = 0x1904;    // Year/Month
-       DATEL = 0x2504;    // Date/Wday
-       TIMEH = 0x1151;    // hours/minutes
-       TIMEL = 0x4300;    // seconds
+       // set 2020-09-02 11-44-51
+       DATEH = 0x2009;    // Year/Month
+       DATEL = 0x203;    // Date/Wday
+       TIMEH = 0x1144;    // hours/minutes
+       TIMEL = 0x5100;    // seconds
    }
-   // set 2019-04-25 11-51-43
-   ALMDATEH = 0x1904;    // Year/Month
-   ALMDATEL = 0x2504;    // Date/Wday
-   ALMTIMEH = 0x1151;    // hours/minutes
-   ALMTIMEL = 0x4300;    // seconds
+   // set 2020-09-02 11-44-51
+   ALMDATEH = 0x2009;    // Year/Month
+   ALMDATEL = 0x203;    // Date/Wday
+   ALMTIMEH = 0x1144;    // hours/minutes
+   ALMTIMEL = 0x5100;    // seconds
    // AMASK Every Minute; ALMRPT 255; CHIME enabled; ALRMEN enabled; 
    RTCCON1H = 0xC3FF;
 
-   // PWCPS 1:1; PS 1:1; CLKSEL SOSC; FDIV 0; 
-   RTCCON2L = 0x00;
-   // DIV 16383; 
-   RTCCON2H = 0x3FFF;
+   // PWCPS 1:1; PS 1:1; CLKSEL LPRC; FDIV 0; 
+   RTCCON2L = 0x01;
+   // DIV 15499; 
+   RTCCON2H = 0x3C8B;
    // PWCSTAB 0; PWCSAMP 0; 
    RTCCON3L = 0x00;
 
