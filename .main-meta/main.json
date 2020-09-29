@@ -1,0 +1,49 @@
+{
+   "metaDataVersion":"1.0.0",
+   "category":"com.microchip.ide.project",
+   "content":{
+      "metaDataVersion":"1.0.0",
+      "name":"com.microchip.mplabx.project.pic24f-lcd-usb-curiosity-lcd-power",
+      "version":"1.0.0",
+      "displayName":"PIC24F LCD USB Curiosity Development Board LCD and Power Demo",
+      "projectName":"pic24f-lcd-usb-curiosity-lcd-power",
+      "shortDescription":"This is the LCD and Power demo software which runs on PIC24F LCD USB Curiosity Development Board.",
+      "ide":{
+         "name":"MPLABX",
+         "semverRange":">=5.40.0"
+      },
+      "compiler":{
+         "name":"XC16",
+         "semverRange":"^1.50.0"
+      },
+      "dfp":{
+         "name":"PIC24F_GL_GU_DFP",
+         "semverRange":"^1.3.38"
+      },
+      "configurator": {
+         "name": "MCC",
+         "semverRange": ">=4.0.1"
+      },
+      "device":{
+         "metaDataVersion":"1.0.0",
+         "category":"com.microchip.portal.contentRef",
+         "content":{
+            "metaDataVersion":"1.0.0",
+            "category":"com.microchip.device",
+            "name":"PIC24FJ512GU410",
+            "versionRange":"*"
+         }
+      },
+      "peripherals":[
+         "SPI",
+         "LCD",
+         "USB"
+      ],
+      "keywords":[
+         "PIC24F",
+         "Segmented LCD",
+         "LCD",
+         "USB"
+      ]
+   }
+}
